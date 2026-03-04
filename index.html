@@ -32,8 +32,10 @@
         margin: 0;
         padding: 0;
       }
-      html {
+      html,
+      body {
         overflow-x: hidden;
+        max-width: 100%;
       }
       body {
         font-family: "Inter", sans-serif;
@@ -96,7 +98,8 @@
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        padding: 2.5rem 4rem;
+        padding: 2.5rem clamp(1.25rem, 5vw, 4rem);
+        box-sizing: border-box;
       }
       #pre-count {
         font-family: "Syne", sans-serif;
@@ -145,6 +148,7 @@
       /* ── Marquee ─────────────────────────────── */
       .marquee-wrap {
         overflow: hidden;
+        max-width: 100vw;
       }
       .marquee-track {
         display: flex;
@@ -161,6 +165,7 @@
       /* ── Project card ────────────────────────── */
       .proj-thumb {
         overflow: hidden;
+        max-width: 100%;
       }
       .proj-thumb img,
       .proj-thumb .thumb-fill {
@@ -241,7 +246,7 @@
         right: 0;
         z-index: 100;
         mix-blend-mode: difference;
-        padding: 1.75rem 4rem;
+        padding: 1.75rem clamp(1rem, 5vw, 4rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -334,14 +339,19 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: 0 4rem 4rem;
+        padding: 0 clamp(1rem, 5vw, 4rem) clamp(1rem, 5vw, 4rem);
         position: relative;
         overflow: hidden;
       "
     >
       <!-- top-right label -->
       <div
-        style="position: absolute; top: 6.5rem; right: 4rem; text-align: right"
+        style="
+          position: absolute;
+          top: 6.5rem;
+          right: clamp(1rem, 5vw, 4rem);
+          text-align: right;
+        "
       >
         <div class="clip">
           <span
@@ -374,7 +384,7 @@
           <span
             class="font-display"
             style="
-              font-size: clamp(4rem, 14vw, 13rem);
+              font-size: clamp(2.8rem, 12vw, 13rem);
               font-weight: 800;
               line-height: 0.92;
               letter-spacing: -0.04em;
@@ -386,7 +396,7 @@
           <span
             class="font-display"
             style="
-              font-size: clamp(4rem, 14vw, 13rem);
+              font-size: clamp(2.8rem, 12vw, 13rem);
               font-weight: 800;
               line-height: 0.92;
               letter-spacing: -0.04em;
@@ -529,7 +539,7 @@
     </div>
 
     <!-- ░░ Work ░░ -->
-    <section id="work" style="padding: 8rem 4rem">
+    <section id="work" style="padding: 8rem clamp(1rem, 5vw, 4rem)">
       <div
         style="
           display: flex;
@@ -557,7 +567,7 @@
           <h2
             class="sr-reveal font-display"
             style="
-              font-size: clamp(2.5rem, 6vw, 5rem);
+              font-size: clamp(1.8rem, 8vw, 5rem);
               font-weight: 800;
               letter-spacing: -0.04em;
               line-height: 1;
@@ -646,7 +656,7 @@
             <h3
               class="proj-title font-display"
               style="
-                font-size: clamp(1.6rem, 3vw, 2.6rem);
+                font-size: clamp(1.1rem, 5vw, 2.6rem);
                 font-weight: 800;
                 letter-spacing: -0.03em;
                 margin-bottom: 0.5rem;
@@ -768,7 +778,7 @@
             <h3
               class="proj-title font-display"
               style="
-                font-size: clamp(1.6rem, 3vw, 2.6rem);
+                font-size: clamp(1.1rem, 5vw, 2.6rem);
                 font-weight: 800;
                 letter-spacing: -0.03em;
                 margin-bottom: 0.5rem;
@@ -890,7 +900,7 @@
             <h3
               class="proj-title font-display"
               style="
-                font-size: clamp(1.6rem, 3vw, 2.6rem);
+                font-size: clamp(1.1rem, 5vw, 2.6rem);
                 font-weight: 800;
                 letter-spacing: -0.03em;
                 margin-bottom: 0.5rem;
@@ -1013,7 +1023,7 @@
             <h3
               class="proj-title font-display"
               style="
-                font-size: clamp(1.6rem, 3vw, 2.6rem);
+                font-size: clamp(1.1rem, 5vw, 2.6rem);
                 font-weight: 800;
                 letter-spacing: -0.03em;
                 margin-bottom: 0.5rem;
@@ -1091,7 +1101,11 @@
     <!-- ░░ About ░░ -->
     <section
       id="about"
-      style="background: #0f0f0f; color: #f2ede4; padding: 8rem 4rem"
+      style="
+        background: #0f0f0f;
+        color: #f2ede4;
+        padding: 8rem clamp(1rem, 5vw, 4rem);
+      "
     >
       <div
         style="
@@ -1119,7 +1133,7 @@
           <h2
             class="sr-dark font-display"
             style="
-              font-size: clamp(2.5rem, 5vw, 4rem);
+              font-size: clamp(1.5rem, 6vw, 4rem);
               font-weight: 800;
               letter-spacing: -0.04em;
               line-height: 1.1;
@@ -1463,7 +1477,7 @@
     <section
       id="contact"
       style="
-        padding: 8rem 4rem;
+        padding: 8rem clamp(1rem, 5vw, 4rem);
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -1486,7 +1500,7 @@
       <h2
         class="sr-reveal font-display"
         style="
-          font-size: clamp(3.5rem, 10vw, 9rem);
+          font-size: clamp(2rem, 10vw, 9rem);
           font-weight: 800;
           letter-spacing: -0.05em;
           line-height: 0.95;
@@ -1623,7 +1637,7 @@
     <footer
       style="
         border-top: 1px solid #0f0f0f12;
-        padding: 1.75rem 4rem;
+        padding: 1.75rem clamp(1rem, 5vw, 4rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1647,6 +1661,18 @@
     <style>
       /* ── Tablet (≤ 900px) ─────────────────────── */
       @media (max-width: 900px) {
+        /* Prevent any child from causing scroll-x */
+        body,
+        #hero,
+        #work,
+        #about,
+        #contact,
+        footer,
+        #preloader {
+          max-width: 100vw;
+          overflow-x: hidden;
+        }
+
         /* Preloader */
         #preloader {
           padding: 2rem 1.5rem;
