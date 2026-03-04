@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR" data-lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -271,7 +271,8 @@
             text-decoration: none;
           "
           class="ul-link"
-          >Work</a
+          data-i18n="nav.work"
+          >Trabalho</a
         >
         <a
           href="#about"
@@ -283,7 +284,8 @@
             text-decoration: none;
           "
           class="ul-link"
-          >About</a
+          data-i18n="nav.about"
+          >Sobre</a
         >
         <a
           href="#contact"
@@ -295,9 +297,33 @@
             text-decoration: none;
           "
           class="ul-link"
-          >Contact</a
+          data-i18n="nav.contact"
+          >Contato</a
         >
       </div>
+      <button
+        id="lang-toggle"
+        onclick="toggleLang()"
+        style="
+          background: none;
+          border: 1px solid #f2ede433;
+          color: #f2ede4;
+          font-family: &quot;Inter&quot;, sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          padding: 0.4rem 1rem;
+          border-radius: 100px;
+          cursor: pointer;
+          transition:
+            border-color 0.3s,
+            opacity 0.3s;
+        "
+        onmouseover="this.style.borderColor = '#f2ede4'"
+        onmouseout="this.style.borderColor = '#f2ede433'"
+      >
+        EN
+      </button>
     </nav>
 
     <!-- ░░ Hero ░░ -->
@@ -325,6 +351,7 @@
               text-transform: uppercase;
               color: #0f0f0f55;
             "
+            data-i18n="hero.role"
             >Full Stack Developer</span
           >
         </div>
@@ -380,9 +407,12 @@
         "
       >
         <div class="clip" style="max-width: 28rem">
-          <span style="font-size: 1.05rem; line-height: 1.65; color: #0f0f0f88">
-            Full stack developer building robust APIs,<br />interactive UIs and
-            products that actually ship.
+          <span
+            data-i18n-html="hero.desc"
+            style="font-size: 1.05rem; line-height: 1.65; color: #0f0f0f88"
+          >
+            Desenvolvedor full stack construindo APIs robustas, interfaces
+            reativas e produtos que realmente saem do papel.
           </span>
         </div>
         <div
@@ -406,7 +436,7 @@
                 text-transform: uppercase;
               "
             >
-              View Work
+              <span data-i18n="hero.cta">Ver Trabalhos</span>
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M1 7h12M7 1l6 6-6 6"
@@ -451,7 +481,8 @@
             letter-spacing: 0.3em;
             text-transform: uppercase;
           "
-          >Scroll</span
+          data-i18n="hero.scroll"
+          >Rolar</span
         >
       </div>
     </section>
@@ -519,8 +550,9 @@
               color: #0f0f0f44;
               margin-bottom: 0.75rem;
             "
+            data-i18n="work.label"
           >
-            Selected Work
+            Trabalhos Selecionados
           </p>
           <h2
             class="sr-reveal font-display"
@@ -530,8 +562,9 @@
               letter-spacing: -0.04em;
               line-height: 1;
             "
+            data-i18n="work.title"
           >
-            Projects.
+            Projetos.
           </h2>
         </div>
         <a
@@ -549,7 +582,7 @@
             gap: 0.5rem;
           "
         >
-          All projects
+          <span data-i18n="work.all">Todos os projetos</span>
           <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
             <path
               d="M1 13L13 1M13 1H4M13 1v9"
@@ -628,6 +661,7 @@
                 max-width: 22rem;
                 line-height: 1.6;
               "
+              data-i18n="proj1.desc"
             >
               REST API em Java para gerenciamento de eventos, com autenticação,
               controle de ingressos e relatórios.
@@ -749,6 +783,7 @@
                 max-width: 22rem;
                 line-height: 1.6;
               "
+              data-i18n="proj2.desc"
             >
               Plataforma completa de gerenciamento de eventos com dashboard
               Vue.js e API Laravel/PHP.
@@ -870,6 +905,7 @@
                 max-width: 22rem;
                 line-height: 1.6;
               "
+              data-i18n="proj3.desc"
             >
               Simulador de checkout com Laravel, filas, e-mail automático de
               confirmação via eventos.
@@ -992,6 +1028,7 @@
                 max-width: 22rem;
                 line-height: 1.6;
               "
+              data-i18n="proj4.desc"
             >
               App Vue.js para agendamento de horários em barbearia integrado com
               API Laravel.
@@ -1075,8 +1112,9 @@
               color: #f2ede444;
               margin-bottom: 1.25rem;
             "
+            data-i18n="about.label"
           >
-            About me
+            Sobre mim
           </p>
           <h2
             class="sr-dark font-display"
@@ -1087,6 +1125,7 @@
               line-height: 1.1;
               margin-bottom: 2.5rem;
             "
+            data-i18n-html="about.title"
           >
             Construindo o futuro,<br />linha por linha.
           </h2>
@@ -1101,12 +1140,12 @@
             "
             class="sr-dark"
           >
-            <p>
+            <p data-i18n="about.p1">
               Sou Altamiro — desenvolvedor full stack de Casas das Tintas, BR.
               Construo APIs robustas com Laravel e Java, interfaces reativas com
               Vue.js e Nuxt.js, e produtos que realmente saem do papel.
             </p>
-            <p>
+            <p data-i18n="about.p2">
               Com 67+ repositórios e 1.316 contribuições no último ano, aprendo
               construindo. Atualmente explorando Spring Boot e TypeScript
               avançado.
@@ -1140,7 +1179,7 @@
                 this.style.color = '#f2ede4';
               "
             >
-              Let's talk
+              <span data-i18n="about.cta">Vamos conversar</span>
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M1 7h12M7 1l6 6-6 6"
@@ -1188,6 +1227,7 @@
                   margin-top: 0.35rem;
                   letter-spacing: 0.05em;
                 "
+                data-i18n="stat.repos"
               >
                 Repositórios públicos
               </p>
@@ -1215,6 +1255,7 @@
                   margin-top: 0.35rem;
                   letter-spacing: 0.05em;
                 "
+                data-i18n="stat.years"
               >
                 Anos de experiência
               </p>
@@ -1242,6 +1283,7 @@
                   margin-top: 0.35rem;
                   letter-spacing: 0.05em;
                 "
+                data-i18n="stat.contribs"
               >
                 Contribuições (último ano)
               </p>
@@ -1268,6 +1310,7 @@
                   margin-top: 0.35rem;
                   letter-spacing: 0.05em;
                 "
+                data-i18n="stat.achievements"
               >
                 GitHub Achievements
               </p>
@@ -1284,6 +1327,7 @@
                 color: #f2ede433;
                 margin-bottom: 1rem;
               "
+              data-i18n="stat.stack"
             >
               Stack
             </p>
@@ -1435,8 +1479,9 @@
           color: #0f0f0f44;
           margin-bottom: 1.5rem;
         "
+        data-i18n="contact.label"
       >
-        Get in touch
+        Entre em contato
       </p>
       <h2
         class="sr-reveal font-display"
@@ -1447,8 +1492,9 @@
           line-height: 0.95;
           margin-bottom: 2.5rem;
         "
+        data-i18n-html="contact.title"
       >
-        Let's build<br />something.
+        Vamos construir<br />algo.
       </h2>
       <p
         class="sr-reveal"
@@ -1459,9 +1505,10 @@
           line-height: 1.7;
           margin-bottom: 3rem;
         "
+        data-i18n="contact.desc"
       >
-        Available for freelance projects and full-time opportunities. Let's
-        create something remarkable together.
+        Disponível apenas para projetos freelance. Vamos criar algo incrível
+        juntos.
       </p>
       <a
         href="https://github.com/AltamiroF-22"
@@ -1584,67 +1631,320 @@
         gap: 1rem;
       "
     >
-      <span style="font-size: 0.65rem; font-family: monospace; color: #0f0f0f33"
-        >© 2026 Altamiro Júnior. All rights reserved.</span
+      <span
+        style="font-size: 0.65rem; font-family: monospace; color: #0f0f0f33"
+        data-i18n="footer.copy"
+        >© 2026 Altamiro Júnior. Todos os direitos reservados.</span
       >
-      <span style="font-size: 0.65rem; font-family: monospace; color: #0f0f0f33"
-        >Designed &amp; Built with ♥</span
+      <span
+        style="font-size: 0.65rem; font-family: monospace; color: #0f0f0f33"
+        data-i18n="footer.built"
+        >Desenvolvido com ♥</span
       >
     </footer>
 
     <!-- ░░ Mobile responsive override ░░ -->
     <style>
+      /* ── Tablet (≤ 900px) ─────────────────────── */
       @media (max-width: 900px) {
+        /* Preloader */
+        #preloader {
+          padding: 2rem 1.5rem;
+        }
+
+        /* Nav */
         #navbar {
-          padding: 1.5rem 1.5rem;
+          padding: 1.25rem 1.5rem !important;
         }
         .nav-links {
           gap: 1.5rem;
         }
+
+        /* Hero */
         #hero {
-          padding: 0 1.5rem 4rem;
+          padding: 0 1.5rem 3.5rem !important;
         }
-        #hero > div[style*="position:absolute;top"] {
-          right: 1.5rem;
-        }
+
+        /* Work */
         #work {
           padding: 5rem 1.5rem;
         }
-        #about {
-          padding: 5rem 1.5rem;
-        }
-        #contact {
-          padding: 5rem 1.5rem;
-        }
-        footer {
-          padding: 1.5rem;
-        }
+
+        /* Projects — full-width stacked cards */
         .proj-row {
-          grid-template-columns: 2.5rem 1fr !important;
-          grid-template-rows: auto auto auto;
-          row-gap: 0.75rem;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 0.9rem !important;
+          padding: 1.5rem 0 !important;
+          border-top: 1px solid #0f0f0f12 !important;
+          border-bottom: none !important;
         }
-        .proj-row > div:nth-child(2) {
-          grid-column: 1 / -1;
+        .proj-row:last-child {
+          border-bottom: 1px solid #0f0f0f12 !important;
+        }
+
+        /* Number — show inline before title */
+        .proj-row > span {
+          display: none !important;
+        }
+
+        /* Thumbnail — full width */
+        .proj-row .proj-thumb {
           width: 100% !important;
           height: 13rem !important;
+          border-radius: 0.75rem !important;
+          flex-shrink: 0 !important;
         }
-        .proj-row > div:nth-child(4) {
-          grid-column: 2;
+        .proj-row .proj-thumb .thumb-fill {
+          border-radius: 0.75rem !important;
+        }
+
+        /* Tags/year row — reverse to row on mobile */
+        .proj-row > div:nth-of-type(3) {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          width: 100% !important;
+        }
+        .proj-row > div:nth-of-type(3) > div {
+          justify-content: flex-start !important;
+        }
+
+        /* About */
+        #about {
+          padding: 5rem 1.5rem;
         }
         #about > div {
           grid-template-columns: 1fr !important;
           gap: 3.5rem !important;
         }
+
+        /* Contact */
+        #contact {
+          padding: 5rem 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+          padding: 1.25rem 1.5rem !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          text-align: center !important;
+          gap: 0.4rem !important;
+        }
       }
+
+      /* ── Phone (≤ 600px) ──────────────────────── */
       @media (max-width: 600px) {
-        .nav-links a:not(:last-child) {
+        /* Nav — keep only logo + contact */
+        .nav-links a[href="#work"],
+        .nav-links a[href="#about"] {
           display: none;
+        }
+        .nav-links {
+          gap: 1rem;
+        }
+
+        /* Hero — hide top-right label to avoid overlap */
+        #hero > div:first-child {
+          display: none !important;
+        }
+
+        /* Hero subtitle — no forced line break */
+        #hero .clip span br {
+          display: none;
+        }
+
+        /* Hero description */
+        #hero .clip[style*="max-width"] {
+          max-width: 100% !important;
+        }
+
+        /* Project title — tighter on small screens */
+        .proj-title {
+          font-size: 1.5rem !important;
+        }
+
+        /* About stats counters */
+        .counter {
+          font-size: 2.6rem !important;
+        }
+        #about .font-display:not(.counter) {
+          font-size: 2.6rem !important;
+        }
+
+        /* About heading */
+        #about h2 {
+          font-size: clamp(1.9rem, 8vw, 3rem) !important;
+        }
+
+        /* About description */
+        #about p {
+          font-size: 0.9rem !important;
+        }
+
+        /* Contact heading — reduce min size */
+        #contact h2 {
+          font-size: clamp(2.6rem, 13vw, 9rem) !important;
+          line-height: 1 !important;
+        }
+
+        /* Contact social links — tighter wrap */
+        #contact > div:last-of-type {
+          gap: 1.5rem !important;
+        }
+
+        /* Work section header */
+        #work h2 {
+          font-size: clamp(2rem, 9vw, 5rem) !important;
+        }
+      }
+
+      /* ── Extra small (≤ 400px) ────────────────── */
+      @media (max-width: 400px) {
+        .proj-row .proj-thumb {
+          height: 11rem !important;
+        }
+        .counter {
+          font-size: 2.2rem !important;
+        }
+        #about .font-display:not(.counter) {
+          font-size: 2.2rem !important;
+        }
+        #contact h2 {
+          font-size: clamp(2.2rem, 12vw, 4rem) !important;
         }
       }
     </style>
 
     <script>
+      /* ── i18n ────────────────────────────────── */
+      const translations = {
+        pt: {
+          "nav.work": "Trabalho",
+          "nav.about": "Sobre",
+          "nav.contact": "Contato",
+          "hero.role": "Full Stack Developer",
+          "hero.desc":
+            "Desenvolvedor full stack construindo APIs robustas, interfaces reativas e produtos que realmente saem do papel.",
+          "hero.cta": "Ver Trabalhos",
+          "hero.scroll": "Rolar",
+          "work.label": "Trabalhos Selecionados",
+          "work.title": "Projetos.",
+          "work.all": "Todos os projetos",
+          "proj1.desc":
+            "REST API em Java para gerenciamento de eventos, com autenticação, controle de ingressos e relatórios.",
+          "proj2.desc":
+            "Plataforma completa de gerenciamento de eventos com dashboard Vue.js e API Laravel/PHP.",
+          "proj3.desc":
+            "Simulador de checkout com Laravel, filas, e-mail automático de confirmação via eventos.",
+          "proj4.desc":
+            "App Vue.js para agendamento de horários em barbearia integrado com API Laravel.",
+          "about.label": "Sobre mim",
+          "about.title": "Construindo o futuro,<br/>linha por linha.",
+          "about.p1":
+            "Sou Altamiro — desenvolvedor full stack de Casas das Tintas, BR. Construo APIs robustas com Laravel e Java, interfaces reativas com Vue.js e Nuxt.js, e produtos que realmente saem do papel.",
+          "about.p2":
+            "Com 67+ repositórios e 1.316 contribuições no último ano, aprendo construindo. Atualmente explorando Spring Boot e TypeScript avançado.",
+          "about.cta": "Vamos conversar",
+          "stat.repos": "Repositórios públicos",
+          "stat.years": "Anos de experiência",
+          "stat.contribs": "Contribuições (último ano)",
+          "stat.achievements": "GitHub Achievements",
+          "stat.stack": "Stack",
+          "contact.label": "Entre em contato",
+          "contact.title": "Vamos construir<br/>algo.",
+          "contact.desc":
+            "Disponível apenas para projetos freelance. Vamos criar algo incrível juntos.",
+          "footer.copy":
+            "© 2026 Altamiro Júnior. Todos os direitos reservados.",
+          "footer.built": "Desenvolvido com ♥",
+          "lang.btn": "EN",
+        },
+        en: {
+          "nav.work": "Work",
+          "nav.about": "About",
+          "nav.contact": "Contact",
+          "hero.role": "Full Stack Developer",
+          "hero.desc":
+            "Full stack developer building robust APIs, interactive UIs and products that actually ship.",
+          "hero.cta": "View Work",
+          "hero.scroll": "Scroll",
+          "work.label": "Selected Work",
+          "work.title": "Projects.",
+          "work.all": "All projects",
+          "proj1.desc":
+            "REST API in Java for event management, with authentication, ticket control and reporting.",
+          "proj2.desc":
+            "Full event management platform with Vue.js dashboard and Laravel/PHP API.",
+          "proj3.desc":
+            "Checkout simulator with Laravel, queues and automatic order confirmation emails via events.",
+          "proj4.desc":
+            "Vue.js app for scheduling barbershop appointments integrated with a Laravel API.",
+          "about.label": "About me",
+          "about.title": "Building the future,<br/>line by line.",
+          "about.p1":
+            "I'm Altamiro — a full stack developer from Casas das Tintas, BR. I build robust APIs with Laravel and Java, reactive UIs with Vue.js and Nuxt.js, and products that actually ship.",
+          "about.p2":
+            "With 67+ repos and 1,316 contributions in the last year, I learn by building. Currently exploring Spring Boot and advanced TypeScript.",
+          "about.cta": "Let's talk",
+          "stat.repos": "Public repositories",
+          "stat.years": "Years of experience",
+          "stat.contribs": "Contributions (last year)",
+          "stat.achievements": "GitHub Achievements",
+          "stat.stack": "Stack",
+          "contact.label": "Get in touch",
+          "contact.title": "Let's build<br/>something.",
+          "contact.desc":
+            "Available for freelance projects only. Let's create something remarkable together.",
+          "footer.copy": "© 2026 Altamiro Júnior. All rights reserved.",
+          "footer.built": "Designed & Built with ♥",
+          "lang.btn": "PT",
+        },
+      };
+
+      let currentLang = "pt";
+
+      function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+        document.documentElement.setAttribute("data-lang", lang);
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[lang][key] !== undefined)
+            el.textContent = translations[lang][key];
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-html");
+          if (translations[lang][key] !== undefined)
+            el.innerHTML = translations[lang][key];
+        });
+        const btn = document.getElementById("lang-toggle");
+        if (btn) {
+          btn.textContent = translations[lang]["lang.btn"];
+          gsap.fromTo(
+            btn,
+            { opacity: 0, y: -5 },
+            { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+          );
+        }
+        try {
+          localStorage.setItem("lang", lang);
+        } catch (e) {}
+      }
+
+      function toggleLang() {
+        applyLang(currentLang === "pt" ? "en" : "pt");
+      }
+
+      (function initLang() {
+        try {
+          const saved = localStorage.getItem("lang");
+          if (saved && saved !== "pt") applyLang(saved);
+        } catch (e) {}
+      })();
+
       gsap.registerPlugin(ScrollTrigger);
 
       /* ── Lenis smooth scroll ─────────────────── */
