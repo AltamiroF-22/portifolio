@@ -1,0 +1,1862 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System — AM.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Reset & Base ──────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        /* ── Color Tokens ── */
+        --color-bg: #f2ede4;
+        --color-ink: #0f0f0f;
+        --color-ink-60: #0f0f0f99;
+        --color-ink-44: #0f0f0f70;
+        --color-ink-33: #0f0f0f54;
+        --color-ink-22: #0f0f0f38;
+        --color-ink-15: #0f0f0f26;
+        --color-ink-12: #0f0f0f1f;
+        --color-surface: #0f0f0f;
+        --color-on-surface: #f2ede4;
+
+        /* ── Project Palette ── */
+        --proj-01-from: #6366f1;
+        --proj-01-to: #3b0764;
+        --proj-02-from: #f59e0b;
+        --proj-02-to: #b45309;
+        --proj-03-from: #10b981;
+        --proj-03-to: #065f46;
+        --proj-04-from: #f43f5e;
+        --proj-04-to: #9f1239;
+
+        /* ── Font Families ── */
+        --font-display: "Syne", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --font-mono: monospace;
+
+        /* ── Type Scale ── */
+        --text-hero: clamp(2.8rem, 12vw, 13rem);
+        --text-h1: clamp(2rem, 10vw, 9rem);
+        --text-h2-lg: clamp(1.8rem, 8vw, 5rem);
+        --text-h2: clamp(1.5rem, 6vw, 4rem);
+        --text-h3: clamp(1.1rem, 5vw, 2.6rem);
+        --text-preload: clamp(5rem, 12vw, 9rem);
+        --text-body-lg: 1.05rem;
+        --text-body: 0.95rem;
+        --text-body-sm: 0.85rem;
+        --text-label: 0.75rem;
+        --text-cap: 0.7rem;
+        --text-fine: 0.65rem;
+        --text-micro: 0.6rem;
+
+        /* ── Spacing ── */
+        --space-px: clamp(1rem, 5vw, 4rem);
+        --radius-full: 100px;
+        --radius-card: 0.85rem;
+
+        /* ── Motion ── */
+        --ease-expo: expo.inOut;
+        --ease-power: power3.out;
+        --dur-fast: 0.3s;
+        --dur-mid: 0.85s;
+        --dur-slow: 1.1s;
+      }
+
+      html {
+        background: var(--color-bg);
+        color: var(--color-ink);
+      }
+      body {
+        font-family: var(--font-body);
+        font-size: var(--text-body);
+        line-height: 1.6;
+        padding: 0;
+      }
+
+      /* ── Layout ── */
+      .ds-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5rem clamp(1.25rem, 5vw, 4rem);
+      }
+
+      .ds-section {
+        padding: 4rem 0;
+        border-top: 1px solid var(--color-ink-12);
+      }
+
+      .ds-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .ds-section-title {
+        font-family: var(--font-display);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--color-ink-33);
+      }
+
+      .ds-section-num {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--color-ink-22);
+      }
+
+      /* ── Top bar ── */
+      .ds-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-ink-12);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem clamp(1.25rem, 5vw, 4rem);
+      }
+
+      .ds-topbar-logo {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        color: var(--color-ink);
+      }
+
+      .ds-topbar-back {
+        font-size: var(--text-fine);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-ink-44);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .ds-topbar-back:hover {
+        color: var(--color-ink);
+      }
+
+      /* ── Page Hero ── */
+      .ds-page-hero {
+        padding: 5rem 0 4rem;
+        border-top: none;
+      }
+
+      .ds-page-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 10vw, 8rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 0.92;
+        margin-bottom: 1.5rem;
+      }
+
+      .ds-page-hero p {
+        font-size: var(--text-body-lg);
+        color: var(--color-ink-60);
+        max-width: 36rem;
+        line-height: 1.7;
+      }
+
+      /* ── Color swatches ── */
+      .swatch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        gap: 1rem;
+      }
+
+      .swatch {
+        border-radius: 0.6rem;
+        overflow: hidden;
+        border: 1px solid var(--color-ink-12);
+      }
+
+      .swatch-color {
+        height: 5rem;
+      }
+
+      .swatch-info {
+        padding: 0.75rem;
+        background: var(--color-bg);
+      }
+
+      .swatch-name {
+        font-size: var(--text-fine);
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+      }
+
+      .swatch-value {
+        font-family: var(--font-mono);
+        font-size: var(--text-micro);
+        color: var(--color-ink-44);
+      }
+
+      /* Gradient swatches */
+      .swatch-grid-grad {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        gap: 1rem;
+      }
+
+      .swatch-grad .swatch-color {
+        height: 7rem;
+      }
+
+      /* ── Typography specimens ── */
+      .type-specimen {
+        padding: 2rem 0;
+        border-bottom: 1px solid var(--color-ink-12);
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .type-specimen:last-child {
+        border-bottom: none;
+      }
+
+      .type-meta {
+        flex-shrink: 0;
+        min-width: 13rem;
+      }
+
+      .type-meta-label {
+        font-family: var(--font-mono);
+        font-size: var(--text-micro);
+        color: var(--color-ink-33);
+        margin-bottom: 0.4rem;
+      }
+
+      .type-meta-value {
+        font-size: var(--text-fine);
+        color: var(--color-ink-44);
+        font-family: var(--font-mono);
+        line-height: 1.8;
+      }
+
+      /* ── Spacing tokens ── */
+      .space-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .space-row {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .space-bar {
+        height: 0.9rem;
+        background: var(--color-ink);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .space-label {
+        font-family: var(--font-mono);
+        font-size: var(--text-micro);
+        color: var(--color-ink-44);
+        white-space: nowrap;
+      }
+
+      /* ── Radius tokens ── */
+      .radius-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: flex-end;
+      }
+
+      .radius-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .radius-box {
+        width: 5rem;
+        height: 5rem;
+        background: var(--color-ink);
+      }
+
+      .radius-label {
+        font-family: var(--font-mono);
+        font-size: var(--text-micro);
+        color: var(--color-ink-44);
+        text-align: center;
+      }
+
+      /* ── Components ── */
+      .comp-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .comp-card {
+        border: 1px solid var(--color-ink-12);
+        border-radius: 0.6rem;
+        overflow: hidden;
+      }
+
+      .comp-preview {
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-bg);
+        min-height: 8rem;
+      }
+
+      .comp-preview.dark {
+        background: var(--color-ink);
+      }
+
+      .comp-meta {
+        padding: 0.75rem 1rem;
+        border-top: 1px solid var(--color-ink-12);
+      }
+
+      .comp-name {
+        font-size: var(--text-fine);
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+      }
+
+      .comp-desc {
+        font-family: var(--font-mono);
+        font-size: var(--text-micro);
+        color: var(--color-ink-33);
+      }
+
+      /* ── Button components ── */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--color-ink);
+        color: var(--color-on-surface);
+        padding: 1rem 2.25rem;
+        border-radius: var(--radius-full);
+        font-family: var(--font-body);
+        font-size: var(--text-fine);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: transparent;
+        color: var(--color-ink);
+        padding: 0.9rem 2rem;
+        border-radius: var(--radius-full);
+        border: 1px solid var(--color-ink-22);
+        font-family: var(--font-body);
+        font-size: var(--text-fine);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        color: var(--color-ink-44);
+        padding: 0;
+        border: none;
+        font-family: var(--font-body);
+        font-size: var(--text-fine);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .btn-lang {
+        background: none;
+        border: 1px solid #f2ede433;
+        color: #f2ede4;
+        font-family: var(--font-body);
+        font-size: var(--text-fine);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: var(--radius-full);
+        cursor: pointer;
+      }
+
+      /* ── Tag / Badge ── */
+      .tag {
+        display: inline-block;
+        font-size: var(--text-micro);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-ink-22);
+        border-radius: var(--radius-full);
+        padding: 0.3rem 0.8rem;
+        color: var(--color-ink-44);
+      }
+
+      .tag-dark {
+        display: inline-block;
+        font-size: var(--text-fine);
+        letter-spacing: 0.1em;
+        border: 1px solid #f2ede422;
+        border-radius: var(--radius-full);
+        padding: 0.35rem 0.9rem;
+        color: #f2ede466;
+      }
+
+      /* ── Motion table ── */
+      .motion-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .motion-table th,
+      .motion-table td {
+        text-align: left;
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--color-ink-12);
+        font-size: var(--text-fine);
+      }
+
+      .motion-table th {
+        font-size: var(--text-micro);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-ink-33);
+        font-weight: 400;
+      }
+
+      .motion-table td:first-child {
+        font-family: var(--font-mono);
+        color: var(--color-ink-44);
+      }
+
+      /* ── Thumb preview ── */
+      .thumb-preview {
+        width: 100%;
+        height: 6rem;
+        border-radius: var(--radius-card);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .thumb-label {
+        font-size: var(--text-micro);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: white;
+        opacity: 0.55;
+      }
+
+      /* ── ul-link underline ── */
+      .ul-link {
+        position: relative;
+        text-decoration: none;
+      }
+      .ul-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .ul-link:hover::after {
+        width: 100%;
+      }
+
+      /* ── Token table ── */
+      .token-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .token-table th,
+      .token-table td {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--color-ink-12);
+        font-size: var(--text-fine);
+      }
+      .token-table th {
+        font-size: var(--text-micro);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-ink-33);
+        font-weight: 400;
+      }
+      .token-table td:first-child {
+        font-family: var(--font-mono);
+        color: var(--color-ink-44);
+      }
+      .token-table td:last-child {
+        font-family: var(--font-mono);
+        color: var(--color-ink-33);
+      }
+
+      /* ── Divider ── */
+      hr {
+        border: none;
+        border-top: 1px solid var(--color-ink-12);
+        margin: 3rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top bar -->
+    <header class="ds-topbar">
+      <a href="index.html" class="ds-topbar-logo">AM.</a>
+      <a href="index.html" class="ds-topbar-back">← Voltar ao portfólio</a>
+    </header>
+
+    <div class="ds-wrap">
+      <!-- Page Hero -->
+      <div class="ds-page-hero ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">00</span>
+          <span class="ds-section-title">Design System</span>
+        </div>
+        <h1 style="font-family: var(--font-display)">Design<br />Tokens.</h1>
+        <p style="margin-top: 1.5rem">
+          Fonte única da verdade para tipografia, cor, espaçamento, componentes
+          e motion do portfólio — garantindo consistência em todo o projeto.
+        </p>
+      </div>
+
+      <!-- 01 · Colors -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">01</span>
+          <span class="ds-section-title">Cores Principais</span>
+        </div>
+
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: #f2ede4; border-bottom: 1px solid #0f0f0f12"
+            ></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Background</div>
+              <div class="swatch-value">--color-bg</div>
+              <div class="swatch-value">#f2ede4</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink / Surface</div>
+              <div class="swatch-value">--color-ink</div>
+              <div class="swatch-value">#0f0f0f</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f99"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink 60%</div>
+              <div class="swatch-value">--color-ink-60</div>
+              <div class="swatch-value">#0f0f0f · α 60</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f70"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink 44%</div>
+              <div class="swatch-value">--color-ink-44</div>
+              <div class="swatch-value">#0f0f0f · α 44</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f54"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink 33%</div>
+              <div class="swatch-value">--color-ink-33</div>
+              <div class="swatch-value">#0f0f0f · α 33</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f38"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink 22%</div>
+              <div class="swatch-value">--color-ink-22</div>
+              <div class="swatch-value">#0f0f0f · α 22</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0f0f0f1f"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ink 12%</div>
+              <div class="swatch-value">--color-ink-12</div>
+              <div class="swatch-value">#0f0f0f · α 12 · borders</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: #f2ede4; border-bottom: 1px solid #0f0f0f12"
+            >
+              <div
+                style="
+                  background: #0f0f0f;
+                  height: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <span
+                  style="
+                    font-size: 0.6rem;
+                    color: #f2ede4;
+                    letter-spacing: 0.2em;
+                    font-family: monospace;
+                  "
+                  >NAV / BLEND</span
+                >
+              </div>
+            </div>
+            <div class="swatch-info">
+              <div class="swatch-name">Blend Mode</div>
+              <div class="swatch-value">mix-blend-mode: difference</div>
+              <div class="swatch-value">Nav element</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Gradients -->
+        <div style="margin-top: 2rem">
+          <div class="ds-header" style="margin-bottom: 1.25rem">
+            <span class="ds-section-title" style="font-size: 0.55rem"
+              >Gradientes dos Projetos</span
+            >
+          </div>
+          <div class="swatch-grid-grad">
+            <div class="swatch swatch-grad">
+              <div
+                class="swatch-color thumb-preview"
+                style="
+                  background: linear-gradient(135deg, #6366f1, #3b0764);
+                  height: 6rem;
+                  border-radius: 0;
+                "
+              >
+                <span class="thumb-label">Java API</span>
+              </div>
+              <div class="swatch-info">
+                <div class="swatch-name">Proj 01 · eventTechAPI</div>
+                <div class="swatch-value">#6366f1 → #3b0764</div>
+              </div>
+            </div>
+            <div class="swatch swatch-grad">
+              <div
+                class="swatch-color thumb-preview"
+                style="
+                  background: linear-gradient(135deg, #f59e0b, #b45309);
+                  height: 6rem;
+                  border-radius: 0;
+                "
+              >
+                <span class="thumb-label">Full Stack</span>
+              </div>
+              <div class="swatch-info">
+                <div class="swatch-name">Proj 02 · Gestão de Eventos</div>
+                <div class="swatch-value">#f59e0b → #b45309</div>
+              </div>
+            </div>
+            <div class="swatch swatch-grad">
+              <div
+                class="swatch-color thumb-preview"
+                style="
+                  background: linear-gradient(135deg, #10b981, #065f46);
+                  height: 6rem;
+                  border-radius: 0;
+                "
+              >
+                <span class="thumb-label">Laravel</span>
+              </div>
+              <div class="swatch-info">
+                <div class="swatch-name">Proj 03 · Checkout Simulator</div>
+                <div class="swatch-value">#10b981 → #065f46</div>
+              </div>
+            </div>
+            <div class="swatch swatch-grad">
+              <div
+                class="swatch-color thumb-preview"
+                style="
+                  background: linear-gradient(135deg, #f43f5e, #9f1239);
+                  height: 6rem;
+                  border-radius: 0;
+                "
+              >
+                <span class="thumb-label">Vue.js</span>
+              </div>
+              <div class="swatch-info">
+                <div class="swatch-name">Proj 04 · Agende Seu Corte</div>
+                <div class="swatch-value">#f43f5e → #9f1239</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 · Typography -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">02</span>
+          <span class="ds-section-title">Tipografia</span>
+        </div>
+
+        <!-- Families -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+          "
+        >
+          <div
+            style="
+              border: 1px solid var(--color-ink-12);
+              border-radius: 0.6rem;
+              padding: 2rem;
+            "
+          >
+            <p
+              style="
+                font-size: var(--text-micro);
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: var(--color-ink-33);
+                margin-bottom: 1rem;
+              "
+            >
+              Display / Headings
+            </p>
+            <p
+              style="
+                font-family: var(--font-display);
+                font-size: 2.5rem;
+                font-weight: 800;
+                letter-spacing: -0.04em;
+                line-height: 1;
+                margin-bottom: 0.75rem;
+              "
+            >
+              Syne
+            </p>
+            <p
+              style="
+                font-family: var(--font-display);
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--color-ink-44);
+                letter-spacing: 0.02em;
+              "
+            >
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789
+            </p>
+            <div
+              style="
+                margin-top: 1.25rem;
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+              "
+            >
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  700
+                </p>
+                <p
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                  "
+                >
+                  Bold
+                </p>
+              </div>
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  800
+                </p>
+                <p
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.2rem;
+                    font-weight: 800;
+                  "
+                >
+                  ExtraBold
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              border: 1px solid var(--color-ink-12);
+              border-radius: 0.6rem;
+              padding: 2rem;
+            "
+          >
+            <p
+              style="
+                font-size: var(--text-micro);
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: var(--color-ink-33);
+                margin-bottom: 1rem;
+              "
+            >
+              Body / UI
+            </p>
+            <p
+              style="
+                font-family: var(--font-body);
+                font-size: 2.5rem;
+                font-weight: 400;
+                letter-spacing: -0.01em;
+                line-height: 1;
+                margin-bottom: 0.75rem;
+              "
+            >
+              Inter
+            </p>
+            <p
+              style="
+                font-family: var(--font-body);
+                font-size: 1rem;
+                font-weight: 400;
+                color: var(--color-ink-44);
+              "
+            >
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789
+            </p>
+            <div
+              style="
+                margin-top: 1.25rem;
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+              "
+            >
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  300
+                </p>
+                <p
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 1.2rem;
+                    font-weight: 300;
+                  "
+                >
+                  Light
+                </p>
+              </div>
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  400
+                </p>
+                <p
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                  "
+                >
+                  Regular
+                </p>
+              </div>
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  500
+                </p>
+                <p
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                  "
+                >
+                  Medium
+                </p>
+              </div>
+              <div>
+                <p
+                  style="
+                    font-size: var(--text-micro);
+                    color: var(--color-ink-33);
+                    margin-bottom: 0.3rem;
+                    font-family: monospace;
+                  "
+                >
+                  mono
+                </p>
+                <p style="font-family: monospace; font-size: 1.2rem">Mono</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type Scale -->
+        <div>
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-hero<br />Syne 800<br />ls: -0.04em<br />lh: 0.92
+              </div>
+            </div>
+            <div style="overflow: hidden">
+              <span
+                style="
+                  font-family: var(--font-display);
+                  font-size: clamp(2.8rem, 8vw, 7rem);
+                  font-weight: 800;
+                  letter-spacing: -0.04em;
+                  line-height: 0.92;
+                  display: block;
+                "
+                >Altamiro</span
+              >
+            </div>
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                clamp(2.8rem,<br />12vw, 13rem)<br />Hero Name
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-h1<br />Syne 800<br />ls: -0.05em<br />lh: 0.95
+              </div>
+            </div>
+            <span
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(2rem, 6vw, 5.5rem);
+                font-weight: 800;
+                letter-spacing: -0.05em;
+                line-height: 0.95;
+              "
+              >Vamos construir algo.</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                clamp(2rem,<br />10vw, 9rem)<br />Contact H1
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-h2-lg<br />Syne 800<br />ls: -0.04em<br />lh: 1
+              </div>
+            </div>
+            <span
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(1.8rem, 5vw, 4rem);
+                font-weight: 800;
+                letter-spacing: -0.04em;
+                line-height: 1;
+              "
+              >Projetos.</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                clamp(1.8rem,<br />8vw, 5rem)<br />Work H2
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-h2<br />Syne 800<br />ls: -0.04em<br />lh: 1.1
+              </div>
+            </div>
+            <span
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(1.5rem, 4vw, 3rem);
+                font-weight: 800;
+                letter-spacing: -0.04em;
+                line-height: 1.1;
+              "
+              >Construindo o futuro, linha por linha.</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                clamp(1.5rem,<br />6vw, 4rem)<br />About H2
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-h3<br />Syne 800<br />ls: -0.03em
+              </div>
+            </div>
+            <span
+              style="
+                font-family: var(--font-display);
+                font-size: clamp(1.1rem, 3vw, 2.2rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+              "
+              >eventTechAPI</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                clamp(1.1rem,<br />5vw, 2.6rem)<br />Project H3
+              </div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-body-lg<br />Inter 400<br />lh: 1.65
+              </div>
+            </div>
+            <span
+              style="
+                font-size: 1.05rem;
+                line-height: 1.65;
+                color: var(--color-ink-60);
+                max-width: 40rem;
+                display: block;
+              "
+              >Desenvolvedor full stack construindo APIs robustas, interfaces
+              reativas e produtos que realmente saem do papel.</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">1.05rem<br />Hero desc</div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-body<br />Inter 400<br />lh: 1.8
+              </div>
+            </div>
+            <span
+              style="
+                font-size: 0.95rem;
+                line-height: 1.8;
+                color: var(--color-ink-44);
+                max-width: 40rem;
+                display: block;
+              "
+              >Com 67+ repositórios e 1.316 contribuições no último ano, aprendo
+              construindo. Atualmente explorando Spring Boot e TypeScript
+              avançado.</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">0.95rem<br />Body copy</div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-fine<br />Inter 400<br />ls: 0.25em<br />uppercase
+              </div>
+            </div>
+            <span
+              style="
+                font-size: 0.65rem;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: var(--color-ink-44);
+              "
+              >Trabalhos Selecionados</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">0.65rem<br />Labels / Nav / UI</div>
+            </div>
+          </div>
+
+          <div class="type-specimen">
+            <div class="type-meta">
+              <div class="type-meta-label">Token</div>
+              <div class="type-meta-value">
+                --text-micro<br />Mono<br />ls: 0.25em
+              </div>
+            </div>
+            <span
+              style="
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                font-family: monospace;
+                color: var(--color-ink-33);
+              "
+              >01 · 2026 · Java API</span
+            >
+            <div class="type-meta" style="text-align: right">
+              <div class="type-meta-value">
+                0.6rem<br />Project numbers / dates
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 · Spacing -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">03</span>
+          <span class="ds-section-title">Espaçamento</span>
+        </div>
+
+        <div class="space-grid">
+          <div class="space-row">
+            <div class="space-bar" style="width: 0.5rem"></div>
+            <span class="space-label">0.5rem · 8px — gap de tags</span>
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 0.75rem"></div>
+            <span class="space-label"
+              >0.75rem · 12px — gap de ícone em botão</span
+            >
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 1rem"></div>
+            <span class="space-label"
+              >1rem · 16px — gap mínimo de padding horizontal (clamp min)</span
+            >
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 1.5rem"></div>
+            <span class="space-label">1.5rem · 24px — gap nav mobile</span>
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 2rem"></div>
+            <span class="space-label">2rem · 32px — gap bottom row hero</span>
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 2.5rem"></div>
+            <span class="space-label"
+              >2.5rem · 40px — gap social links, nav desktop</span
+            >
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 4rem"></div>
+            <span class="space-label"
+              >4rem · 64px — padding horizontal máximo (clamp max)</span
+            >
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 5rem"></div>
+            <span class="space-label"
+              >5rem · 80px — section padding mobile</span
+            >
+          </div>
+          <div class="space-row">
+            <div class="space-bar" style="width: 8rem"></div>
+            <span class="space-label"
+              >8rem · 128px — section padding desktop</span
+            >
+          </div>
+        </div>
+
+        <div style="margin-top: 2.5rem">
+          <table class="token-table">
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Valor</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>--space-px</td>
+                <td>clamp(1rem, 5vw, 4rem)</td>
+                <td>Padding horizontal global</td>
+              </tr>
+              <tr>
+                <td>--radius-full</td>
+                <td>100px</td>
+                <td>Botões, tags, badges</td>
+              </tr>
+              <tr>
+                <td>--radius-card</td>
+                <td>0.85rem</td>
+                <td>Thumbnails dos projetos</td>
+              </tr>
+              <tr>
+                <td>section vertical</td>
+                <td>8rem (desktop) / 5rem (mobile)</td>
+                <td>Padding top/bottom sections</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 04 · Border Radius -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">04</span>
+          <span class="ds-section-title">Border Radius</span>
+        </div>
+        <div class="radius-grid">
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius: 0"></div>
+            <div class="radius-label">0<br />Borders / Lines</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius: 0.6rem"></div>
+            <div class="radius-label">0.6rem<br />Cards / Swatches</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius: 0.75rem"></div>
+            <div class="radius-label">0.75rem<br />Thumbs mobile</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius: 0.85rem"></div>
+            <div class="radius-label">
+              0.85rem · --radius-card<br />Thumbs desktop
+            </div>
+          </div>
+          <div class="radius-item">
+            <div
+              class="radius-box"
+              style="border-radius: 100px; width: 8rem"
+            ></div>
+            <div class="radius-label">
+              100px · --radius-full<br />Botões / Tags
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 · Components -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">05</span>
+          <span class="ds-section-title">Componentes</span>
+        </div>
+
+        <!-- Buttons -->
+        <p
+          style="
+            font-size: var(--text-fine);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-ink-33);
+            margin-bottom: 1.25rem;
+          "
+        >
+          Botões
+        </p>
+        <div class="comp-grid" style="margin-bottom: 2.5rem">
+          <div class="comp-card" style="min-width: 14rem">
+            <div class="comp-preview">
+              <button class="btn-primary">
+                Ver Trabalhos
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 7h12M7 1l6 6-6 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="comp-meta">
+              <div class="comp-name">btn-primary</div>
+              <div class="comp-desc">bg #0f0f0f · color #f2ede4</div>
+            </div>
+          </div>
+
+          <div class="comp-card" style="min-width: 14rem">
+            <div class="comp-preview">
+              <button class="btn-outline">
+                Vamos conversar
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 7h12M7 1l6 6-6 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="comp-meta">
+              <div class="comp-name">btn-outline</div>
+              <div class="comp-desc">border ink-22 · About CTA</div>
+            </div>
+          </div>
+
+          <div class="comp-card" style="min-width: 14rem">
+            <div class="comp-preview dark">
+              <button
+                class="btn-outline"
+                style="border-color: #f2ede422; color: #f2ede4"
+              >
+                Vamos conversar
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 7h12M7 1l6 6-6 6"
+                    stroke="#f2ede4"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="comp-meta">
+              <div class="comp-name">btn-outline-dark</div>
+              <div class="comp-desc">Variante sobre fundo escuro</div>
+            </div>
+          </div>
+
+          <div class="comp-card" style="min-width: 14rem">
+            <div class="comp-preview dark">
+              <button class="btn-lang">EN</button>
+            </div>
+            <div class="comp-meta">
+              <div class="comp-name">btn-lang</div>
+              <div class="comp-desc">Nav i18n toggle · blend diff.</div>
+            </div>
+          </div>
+
+          <div class="comp-card" style="min-width: 14rem">
+            <div class="comp-preview">
+              <a href="#" class="btn-ghost ul-link"
+                >Todos os projetos
+                <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M1 13L13 1M13 1H4M13 1v9"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="comp-meta">
+              <div class="comp-name">btn-ghost / ul-link</div>
+              <div class="comp-desc">Hover: underline slide-in</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <p
+          style="
+            font-size: var(--text-fine);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-ink-33);
+            margin-bottom: 1.25rem;
+          "
+        >
+          Tags / Badges
+        </p>
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+          "
+        >
+          <span class="tag">Java</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Vue</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">Queues</span>
+          <span class="tag">TypeScript</span>
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            background: #0f0f0f;
+            padding: 1rem;
+            border-radius: 0.6rem;
+          "
+        >
+          <span class="tag-dark">Vue.js</span>
+          <span class="tag-dark">Nuxt.js</span>
+          <span class="tag-dark">Next.js</span>
+          <span class="tag-dark">Laravel</span>
+          <span class="tag-dark">Java</span>
+          <span class="tag-dark">Spring Boot</span>
+          <span class="tag-dark">PostgreSQL</span>
+          <span class="tag-dark">Tailwind CSS</span>
+        </div>
+      </section>
+
+      <!-- 06 · Motion -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">06</span>
+          <span class="ds-section-title">Motion / Animação</span>
+        </div>
+
+        <p
+          style="
+            font-size: var(--text-body-sm);
+            color: var(--color-ink-44);
+            margin-bottom: 2rem;
+            max-width: 36rem;
+            line-height: 1.7;
+          "
+        >
+          Todas as animações usam GSAP 3.12.5 com ScrollTrigger. O scroll suave
+          é gerenciado pelo Lenis 1.1.13 (<code
+            style="font-family: monospace; font-size: 0.8em"
+            >lerp: 0.08</code
+          >), integrado ao ticker do GSAP.
+        </p>
+
+        <table class="motion-table">
+          <thead>
+            <tr>
+              <th>Animação</th>
+              <th>Ease</th>
+              <th>Duração</th>
+              <th>Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Preloader bar</td>
+              <td>power2.inOut</td>
+              <td>1.8s</td>
+              <td>Progress bar + contador 0→100</td>
+            </tr>
+            <tr>
+              <td>Preloader exit</td>
+              <td>expo.inOut</td>
+              <td>0.9s</td>
+              <td>yPercent: -100, slide out</td>
+            </tr>
+            <tr>
+              <td>Hero entrance</td>
+              <td>expo.out</td>
+              <td>1.1s · stagger 0.1</td>
+              <td>Clip reveals, y: 100→0</td>
+            </tr>
+            <tr>
+              <td>Scroll line pulse</td>
+              <td>power1.inOut</td>
+              <td>1.4s · yoyo ∞</td>
+              <td>scaleY: 1→0.25 loop</td>
+            </tr>
+            <tr>
+              <td>sr-reveal</td>
+              <td>power3.out</td>
+              <td>0.85s</td>
+              <td>Seções claras, y: 28→0, op: 0→1</td>
+            </tr>
+            <tr>
+              <td>sr-dark</td>
+              <td>power3.out</td>
+              <td>0.85s</td>
+              <td>About section, mesmo parâmetro</td>
+            </tr>
+            <tr>
+              <td>proj-row stagger</td>
+              <td>power3.out</td>
+              <td>0.7s · delay i×0.07</td>
+              <td>y: 35→0, op: 0→1</td>
+            </tr>
+            <tr>
+              <td>Counters</td>
+              <td>power2.out</td>
+              <td>1.6s</td>
+              <td>0 → target, snap integer</td>
+            </tr>
+            <tr>
+              <td>Hero parallax</td>
+              <td>none (scrub)</td>
+              <td>scrub</td>
+              <td>yPercent: 0→18</td>
+            </tr>
+            <tr>
+              <td>Cursor dot</td>
+              <td>—</td>
+              <td>0.08s</td>
+              <td>Segue mouse diretamente</td>
+            </tr>
+            <tr>
+              <td>Cursor ring</td>
+              <td>lerp 0.1</td>
+              <td>ticker</td>
+              <td>Segue com lag suave</td>
+            </tr>
+            <tr>
+              <td>Lang toggle</td>
+              <td>power2.out</td>
+              <td>0.3s</td>
+              <td>opacity 0→1, y -5→0</td>
+            </tr>
+            <tr>
+              <td>Underline hover</td>
+              <td>CSS cubic-bezier .25,1,.5,1</td>
+              <td>0.35s</td>
+              <td>width 0→100% no ::after</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 07 · Breakpoints -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">07</span>
+          <span class="ds-section-title">Breakpoints</span>
+        </div>
+
+        <table class="token-table">
+          <thead>
+            <tr>
+              <th>Breakpoint</th>
+              <th>Largura</th>
+              <th>Mudanças Chave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Desktop</td>
+              <td>&gt; 900px</td>
+              <td>
+                Layout completo, cursor ativo, grid 4 colunas em projetos, about
+                2 colunas
+              </td>
+            </tr>
+            <tr>
+              <td>Tablet</td>
+              <td>≤ 900px</td>
+              <td>
+                Cursor oculto, scroll cue oculto, proj-rows em coluna, about 1
+                coluna, padding 1.5rem
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>≤ 600px</td>
+              <td>
+                Nav mostra só Contato, hero label oculto, proj-title menor,
+                about h2 reduzido
+              </td>
+            </tr>
+            <tr>
+              <td>Extra small</td>
+              <td>≤ 400px</td>
+              <td>
+                Thumbnails 11rem, counters 2.2rem, tamanhos mínimos de título
+                reduzidos
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 08 · i18n -->
+      <section class="ds-section">
+        <div class="ds-header">
+          <span class="ds-section-num">08</span>
+          <span class="ds-section-title">Internacionalização</span>
+        </div>
+
+        <p
+          style="
+            font-size: var(--text-body-sm);
+            color: var(--color-ink-44);
+            margin-bottom: 2rem;
+            max-width: 36rem;
+            line-height: 1.7;
+          "
+        >
+          Sistema i18n vanilla JS com ciclo de 3 idiomas. Idioma salvo em
+          <code style="font-family: monospace; font-size: 0.8em"
+            >localStorage</code
+          >. Padrão: <strong>PT</strong>.
+        </p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+          "
+        >
+          <div
+            style="
+              border: 1px solid var(--color-ink-12);
+              border-radius: 0.6rem;
+              padding: 1.25rem;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-family: var(--font-display);
+                font-size: 1.5rem;
+                font-weight: 800;
+                margin-bottom: 0.5rem;
+              "
+            >
+              PT
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-33);
+                letter-spacing: 0.1em;
+              "
+            >
+              PORTUGUÊS
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-22);
+                margin-top: 0.3rem;
+              "
+            >
+              padrão · botão mostra EN
+            </div>
+          </div>
+          <div
+            style="
+              border: 1px solid var(--color-ink-12);
+              border-radius: 0.6rem;
+              padding: 1.25rem;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-family: var(--font-display);
+                font-size: 1.5rem;
+                font-weight: 800;
+                margin-bottom: 0.5rem;
+              "
+            >
+              EN
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-33);
+                letter-spacing: 0.1em;
+              "
+            >
+              ENGLISH
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-22);
+                margin-top: 0.3rem;
+              "
+            >
+              2º · botão mostra DE
+            </div>
+          </div>
+          <div
+            style="
+              border: 1px solid var(--color-ink-12);
+              border-radius: 0.6rem;
+              padding: 1.25rem;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                font-family: var(--font-display);
+                font-size: 1.5rem;
+                font-weight: 800;
+                margin-bottom: 0.5rem;
+              "
+            >
+              DE
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-33);
+                letter-spacing: 0.1em;
+              "
+            >
+              DEUTSCH
+            </div>
+            <div
+              style="
+                font-size: var(--text-micro);
+                color: var(--color-ink-22);
+                margin-top: 0.3rem;
+              "
+            >
+              3º · botão mostra PT
+            </div>
+          </div>
+        </div>
+
+        <table class="token-table">
+          <thead>
+            <tr>
+              <th>Atributo</th>
+              <th>Método</th>
+              <th>Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>data-i18n</td>
+              <td>el.textContent = ...</td>
+              <td>Texto simples</td>
+            </tr>
+            <tr>
+              <td>data-i18n-html</td>
+              <td>el.innerHTML = ...</td>
+              <td>Texto com &lt;br/&gt; (títulos)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- footer -->
+      <div
+        style="
+          padding: 3rem 0;
+          border-top: 1px solid var(--color-ink-12);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+        "
+      >
+        <span
+          style="
+            font-family: monospace;
+            font-size: var(--text-micro);
+            color: var(--color-ink-22);
+          "
+          >© 2026 Altamiro Júnior · Design System</span
+        >
+        <a
+          href="index.html"
+          class="btn-ghost"
+          style="font-size: var(--text-micro)"
+          >← Voltar ao portfólio</a
+        >
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script>
+      const lenis = new Lenis({ lerp: 0.08, smooth: true });
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    </script>
+  </body>
+</html>
